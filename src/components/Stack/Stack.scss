@@ -1,0 +1,49 @@
+$stackSpacing: (
+  extra-small: 0.25rem,
+  small: 0.5rem,
+  default: 1rem,
+  large: 2rem,
+);
+
+.stack {
+}
+
+.stackVertical {
+  &.stackSpacingExtraSmall {
+    & > *:not(:last-child) {
+      margin-bottom: map_get($stackSpacing, "extra-small");
+    }
+  }
+
+  &.stackSpacingSmall {
+    & > *:not(:last-child) {
+      margin-bottom: map_get($stackSpacing, "small");
+    }
+  }
+
+  &.stackSpacingDefault {
+    & > *:not(:last-child) {
+      margin-bottom: map_get($stackSpacing, "default");
+    }
+  }
+}
+
+.stackHorizontal {
+  &.stackSpacingExtraSmall {
+    & > *:not(:last-child) {
+      margin-right: map_get($stackSpacing, "extra-small");
+    }
+  }
+
+  &.stackSpacingSmall {
+    & > *:not(:last-child) {
+      margin-right: map_get($stackSpacing, "small");
+    }
+  }
+
+  &.stackSpacingDefault {
+    & > *:not(:last-child) {
+      margin-right: map_get($stackSpacing, "default");
+    }
+  }
+}

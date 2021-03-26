@@ -1,0 +1,45 @@
+{
+  "name": "spin-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/*.html --cert cert/server.crt --key cert/server.key --port 4040",
+    "build:netlify": "parcel build src/*.html --no-minify --public-url ./ -d build/",
+    "build:twitch": "rm -rf build/ build.zip && parcel build src/*.html --no-minify --public-url ./ -d build/ && cd build/ && zip -r -X ../build.zip .",
+    "watch": "parcel watch src/*.html"
+  },
+  "staticFiles": {
+    "watcherGlob": "**/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.7.0",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "babel-plugin-styled-components": "^1.12.0",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-static-files-copy": "^2.3.1",
+    "postcss-modules": "^2.0.0",
+    "prettier": "^1.18.2",
+    "styled-components": "^5.2.1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.7.1",
+    "@reduxjs/toolkit": "^1.5.0",
+    "@sentry/react": "^5.30.0",
+    "@sentry/tracing": "^5.30.0",
+    "@svgr/parcel-plugin-svgr": "^5.5.0",
+    "axios": "^0.19.2",
+    "classnames": "^2.2.6",
+    "framer-motion": "^4.0.3",
+    "lodash": "^4.17.20",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.7.2",
+    "pusher-js": "^7.0.0",
+    "query-string": "^6.13.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
