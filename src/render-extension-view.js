@@ -20,6 +20,8 @@ import isHostedOnTwitch from "./util/is-hosted-on-twitch";
 //  document.body.classList.add(styles.fakeBackground);
 //}
 
+import "./global-styles.scss";
+
 export default function renderExtensionView(children) {
   ReactDOM.render(
     <TwitchHelper useFakeTwitchHelperAPI={!isHostedOnTwitch()}>{children}</TwitchHelper>,

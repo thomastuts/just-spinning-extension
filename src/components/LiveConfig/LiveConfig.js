@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { fulfillPrize, getActivePrize, getQueue, startPrize } from "../../api/ebs.js";
 import DebugJSON from "../DebugJSON/DebugJSON.js";
+import Queue from "../Queue/Queue.js";
 
 const LiveConfig = () => {
   const [isStartingPrize, setIsStartingPrize] = useState(false);
@@ -28,7 +29,7 @@ const LiveConfig = () => {
   }, [activePrize]);
 
   return (
-    <div style={{ background: "white" }}>
+    <React.Fragment>
       {activePrize && (
         <React.Fragment>
           <DebugJSON data={activePrize} />
@@ -36,36 +37,8 @@ const LiveConfig = () => {
           <hr />
         </React.Fragment>
       )}
-      {queue.length === 0 && <p>No Just Spinning prizes queued.</p>}
-      {queue.length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Viewer</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {queue.map(entry => (
-              <tr key={entry.id}>
-                <td>{entry.id}</td>
-                <td>{entry.viewer_display_name}</td>
-                <td>
-                  <button
-                    disabled={isStartingPrize || activePrize}
-                    onClick={() => handleStartPrizeInQueue(entry.id)}
-                  >
-                    START
-                  </button>
-                  <button>CANCEL</button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
+      <Queue prizes={queue} isStartButtonDisabled={activePrize || isStartingPrize} />
+    </React.Fragment>
   );
 };
 
