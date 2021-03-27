@@ -1,44 +1,86 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { fulfillPrize, getActivePrize, getQueue, startPrize } from "../../api/ebs.js";
+import useTwitch from "../../hooks/useTwitch.js";
+import Button from "../Button/Button.js";
+
 import DebugJSON from "../DebugJSON/DebugJSON.js";
 import Queue from "../Queue/Queue.js";
+import Stack from "../Stack/Stack.js";
+
+import styles from "./LiveConfig.scss";
+
+const HUMANIZED_PRIZE_NAMES = {
+  ICEBREAKER: "Icebreaker",
+  GUESS_THE_WORD: "Slow Burn",
+  FILL_IN_THE_BLANK: "Shooting Blanks",
+  ONELINER: "Putting it on the Line",
+  LEGS_OR_HOTDOGS: "Legs or Hotdogs",
+};
 
 const LiveConfig = () => {
-  const [isStartingPrize, setIsStartingPrize] = useState(false);
   const [activePrize, setActivePrize] = useState(null);
-  const [queue, setQueue] = useState([]);
+  const { addPubSubEventListener, removePubSubEventListener } = useTwitch();
 
   useEffect(() => {
-    (async () => {
+    const fetchActivePrize = async () => {
+      console.log("fetchActivePrize");
       try {
-        const { data: queueData } = await getQueue();
-        setQueue(queueData);
-
         const { data: activePrizeData } = await getActivePrize();
         setActivePrize(activePrizeData);
-      } catch (err) {}
-    })();
-  }, []);
+      } catch (err) {
+        setActivePrize(null);
+      }
+    };
 
-  const handleStartPrizeInQueue = async prizeId => {
-    await startPrize(prizeId);
-  };
+    addPubSubEventListener("activePrizeUpdate", fetchActivePrize);
+
+    (async () => {
+      fetchActivePrize();
+    })();
+
+    return () => {
+      removePubSubEventListener("activePrizeUpdate", fetchActivePrize);
+    };
+  }, []);
 
   const handleFullfillActivePrize = useCallback(async () => {
     await fulfillPrize(activePrize.id);
   }, [activePrize]);
 
+  const handleRefundActivePrize = useCallback(async () => {
+    console.log("TO IMPLEMENT");
+    //await fulfillPrize(activePrize.id);
+  }, [activePrize]);
+
   return (
-    <React.Fragment>
+    <Stack vertical spacing="large">
       {activePrize && (
-        <React.Fragment>
-          <DebugJSON data={activePrize} />
-          <button onClick={handleFullfillActivePrize}>FULFILL</button>
-          <hr />
-        </React.Fragment>
+        <Stack vertical spacing="small">
+          <h2>Active game</h2>
+          <div className={styles.activeGameContainer}>
+            <Stack vertical spacing="default">
+              <div>
+                <label>Viewer</label>
+                <div className={styles.highlight}>{activePrize.viewer_display_name}</div>
+              </div>
+              <div>
+                <label>Game type</label>
+                <div className={styles.highlight}>{HUMANIZED_PRIZE_NAMES[activePrize.type]}</div>
+              </div>
+              <div className={styles.actions}>
+                <Button priority="secondary" onClick={handleRefundActivePrize}>
+                  REFUND
+                </Button>
+                <Button priority="primary" onClick={handleFullfillActivePrize}>
+                  FULFILL
+                </Button>
+              </div>
+            </Stack>
+          </div>
+        </Stack>
       )}
-      <Queue prizes={queue} isStartButtonDisabled={activePrize || isStartingPrize} />
-    </React.Fragment>
+      <Queue />
+    </Stack>
   );
 };
 

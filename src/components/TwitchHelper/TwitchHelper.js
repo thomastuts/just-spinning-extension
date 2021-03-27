@@ -18,7 +18,7 @@ const TwitchHelper = ({ useFakeTwitchHelperAPI = false, children }) => {
       listenersByTarget.current[target] = [];
     }
 
-    if (!listenersByTarget.current[target].find(callback)) {
+    if (!listenersByTarget.current[target].find(cb => cb === callback)) {
       listenersByTarget.current[target].push(callback);
     }
   };

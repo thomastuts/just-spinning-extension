@@ -26,6 +26,12 @@ $stackSpacing: (
       margin-bottom: map_get($stackSpacing, "default");
     }
   }
+
+  &.stackSpacingLarge {
+    & > *:not(:last-child) {
+      margin-bottom: map_get($stackSpacing, "large");
+    }
+  }
 }
 
 .stackHorizontal {
@@ -44,6 +50,12 @@ $stackSpacing: (
   &.stackSpacingDefault {
     & > *:not(:last-child) {
       margin-right: map_get($stackSpacing, "default");
+    }
+  }
+
+  &.stackSpacingLarge {
+    & > *:not(:last-child) {
+      margin-right: map_get($stackSpacing, "large");
     }
   }
 }

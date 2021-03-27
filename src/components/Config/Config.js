@@ -5,7 +5,7 @@ import useTwitch from "../../hooks/useTwitch.js";
 import DebugJSON from "../DebugJSON/DebugJSON.js";
 
 const Config = () => {
-  const { auth } = useTwitch();
+  const { addPubSubEventListener } = useTwitch();
   const [config, setConfig] = useState(null);
 
   const fetchConfig = async () => {
@@ -17,6 +17,7 @@ const Config = () => {
 
   useEffect(() => {
     (async () => {
+      addPubSubEventListener("activePrizeUpdate", fetchConfig());
       fetchConfig();
     })();
   }, []);

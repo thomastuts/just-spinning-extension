@@ -1,0 +1,17 @@
+@import "src/styles/variables";
+
+.button {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  border: 0;
+  color: #fff;
+  font-size: 1.125rem;
+}
+
+.button--primary {
+  background-color: $bold-color-tertiary;
+}
+
+.button--secondary {
+  background-color: $bold-color-secondary;
+}

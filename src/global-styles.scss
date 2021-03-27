@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background: #324F57;
   padding: 1rem;
@@ -16,4 +21,5 @@ h2 {
   font-size: 1.5rem;
   font-weight: normal;
   text-shadow: 4px 4px 0 rgba(#000, 0.25);
+  text-transform: uppercase;
 }

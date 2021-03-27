@@ -12,6 +12,8 @@ const getSpacingClassForSpacingUnit = spacingUnit => {
       return styles.stackSpacingSmall;
     case "default":
       return styles.stackSpacingDefault;
+    case "large":
+      return styles.stackSpacingLarge;
   }
 };
 
