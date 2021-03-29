@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { fulfillPrize, getActivePrize, getQueue, startPrize } from "../../api/ebs.js";
+import { fulfillPrize, getActivePrize, getQueue, refundPrize, startPrize } from "../../api/ebs.js";
 import useTwitch from "../../hooks/useTwitch.js";
 import Button from "../Button/Button.js";
 
@@ -14,7 +14,7 @@ const HUMANIZED_PRIZE_NAMES = {
   GUESS_THE_WORD: "Slow Burn",
   FILL_IN_THE_BLANK: "Shooting Blanks",
   ONELINER: "Putting it on the Line",
-  LEGS_OR_HOTDOGS: "Legs or Hotdogs",
+  LEGS_OR_HOTDOGS_QUIZ: "Legs or Hotdogs",
 };
 
 const LiveConfig = () => {
@@ -48,8 +48,7 @@ const LiveConfig = () => {
   }, [activePrize]);
 
   const handleRefundActivePrize = useCallback(async () => {
-    console.log("TO IMPLEMENT");
-    //await fulfillPrize(activePrize.id);
+    await refundPrize(activePrize.id);
   }, [activePrize]);
 
   return (

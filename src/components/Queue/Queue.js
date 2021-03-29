@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getQueue, startPrize } from "../../api/ebs.js";
+import { getQueue, refundPrize, startPrize } from "../../api/ebs.js";
 import useTwitch from "../../hooks/useTwitch.js";
 import Button from "../Button/Button.js";
 
@@ -44,6 +44,10 @@ const Queue = () => {
     await startPrize(prizeId);
   };
 
+  const handleRefundPrize = async prizeId => {
+    await refundPrize(prizeId);
+  };
+
   const showBroadcasterActions = role === "broadcaster";
 
   return (
@@ -68,7 +72,7 @@ const Queue = () => {
                 >
                   <PlaySvgIcon width={16} />
                 </Button>
-                <Button priority="secondary" onClick={() => onCancelPrize(prize.id)}>
+                <Button priority="secondary" onClick={() => handleRefundPrize(prize.id)}>
                   <DeleteSvgIcon width={16} />
                 </Button>
               </Stack>

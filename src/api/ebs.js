@@ -34,6 +34,10 @@ export function fulfillPrize(prizeId) {
   return instance.post(`/prizes/${prizeId}/fulfill`);
 }
 
+export function refundPrize(prizeId) {
+  return instance.post(`/prizes/${prizeId}/refund`);
+}
+
 export function getFakeAuthToken({ channelId, userId }) {
   return instance.get(`/debug/fake-auth-token?channel_id=${channelId}&user_id=${userId}`);
 }

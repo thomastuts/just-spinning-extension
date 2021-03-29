@@ -42,8 +42,8 @@ const Config = () => {
         {config && (
           <Stack vertical spacing="default">
             <p>
-              Your channel is set up for Just Spinning! If you want to adjust the cost of the
-              reward, you can do so in your Creator Dashboard.
+              Your channel is set up for Just Spinning! You can adjust the cost of the reward and
+              the maximum amount per viewer in your Creator Dashboard.
             </p>
             <div className={styles.obsHintWrapper}>
               <Stack vertical spacing="default">
