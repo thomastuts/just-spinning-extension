@@ -33,7 +33,7 @@ export default function createFakeTwitchHelper({
   linkedViewerId = null,
   authResponse,
 }) {
-  //Pusher.logToConsole = true;
+  Pusher.logToConsole = true;
 
   const pusher = new Pusher(process.env.FAKE_TWITCH_PUBSUB_PUSHER_KEY, {
     cluster: "eu",

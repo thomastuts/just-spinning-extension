@@ -28,6 +28,7 @@ const Queue = () => {
     };
 
     addPubSubEventListener("activePrizeUpdate", fetchQueue);
+    addPubSubEventListener("queueUpdate", fetchQueue);
 
     (() => {
       fetchQueue();
@@ -35,6 +36,7 @@ const Queue = () => {
 
     return () => {
       removePubSubEventListener("activePrizeUpdate", fetchQueue);
+      removePubSubEventListener("queueUpdate", fetchQueue);
     };
   }, []);
 
@@ -44,19 +46,21 @@ const Queue = () => {
 
   const showBroadcasterActions = role === "broadcaster";
 
-  if (queue.length === 0) {
-    return <p>No queued players.</p>;
-  }
-
   return (
     <Stack vertical spacing="default">
       <h2>Queued players</h2>
+      {queue.length === 0 && (
+        <p style={{ textAlign: "center" }}>
+          Nobody is in the queue for Just Spinning. To join, use your Channel Points on the Just
+          Spinning reward!
+        </p>
+      )}
       <Stack vertical spacing="small">
         {queue.map(prize => (
           <div className={styles.prize}>
             <div className={styles.prizeViewerName}>{prize.viewer_display_name}</div>
             {showBroadcasterActions && (
-              <div className={styles.prizeActions}>
+              <Stack horizontal spacing="small" className={styles.prizeActions}>
                 <Button
                   priority="primary"
                   disabled={isStartingPrize}
@@ -67,7 +71,7 @@ const Queue = () => {
                 <Button priority="secondary" onClick={() => onCancelPrize(prize.id)}>
                   <DeleteSvgIcon width={16} />
                 </Button>
-              </div>
+              </Stack>
             )}
           </div>
         ))}

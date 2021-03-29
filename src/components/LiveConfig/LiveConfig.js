@@ -69,10 +69,10 @@ const LiveConfig = () => {
               </div>
               <div className={styles.actions}>
                 <Button priority="secondary" onClick={handleRefundActivePrize}>
-                  REFUND
+                  Refund
                 </Button>
                 <Button priority="primary" onClick={handleFullfillActivePrize}>
-                  FULFILL
+                  Finish
                 </Button>
               </div>
             </Stack>

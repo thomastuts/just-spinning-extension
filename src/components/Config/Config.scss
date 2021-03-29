@@ -1,0 +1,24 @@
+@import "src/styles/variables";
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 400px;
+  text-align: center;
+}
+
+.obsHintWrapper {
+  background-color: $bold-color-tertiary;
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.obsUrl {
+  color: #fff;
+  font-family: sans-serif;
+  padding: 0.5rem;
+  border: 1px solid rgba(#fff, 0.2);
+  background: #2C464D;
+  word-break: break-all;
+  white-space: pre;
+  font-size: 0.75rem;
+}

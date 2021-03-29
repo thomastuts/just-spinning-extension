@@ -1,11 +1,16 @@
 @import "src/styles/variables";
 
 .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 0.5rem;
   border-radius: 0.25rem;
   border: 0;
   color: #fff;
   font-size: 1.125rem;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .button--primary {
